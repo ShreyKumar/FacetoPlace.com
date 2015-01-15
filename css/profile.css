@@ -1,0 +1,60 @@
+/* Specific*/
+table#profiletable{
+	font-size: 18px;
+	width: 100%;
+	border: grey 1px;
+	text-align: center;
+}
+div#profilecard {
+	width: 100%;
+}
+div#main > div.pinned-left {
+	margin-right: -1%;
+}
+div#main > div.pinned-right {
+	margin-left: -83.7%;
+	margin-top: 17%;
+}
+
+/* General */
+body {
+	font-family: 'Lato', serif;
+}
+body > div#main {
+	background-color: black;
+	display: block;
+	height: auto;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	color: white;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	padding-left: 40px;
+}
+div.panel.panel-default{
+	width: 40%;
+	float: left;
+	margin-left: 35px;
+}
+div.panel.panel-default > div.panel-body {
+	color: black;
+	background-color: transparent;
+}
+.form-control {
+	margin-bottom: 5px;
+}
+.form-name{
+	width: 48.6%;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.birthdays {
+	width: 48.6%;
+	float: left;
+	margin-right: 5px;
+}
+div#main > form > .form-group > .form-control {
+	margin: 3%;
+}

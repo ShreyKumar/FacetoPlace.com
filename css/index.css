@@ -1,0 +1,66 @@
+body {
+	font-family: 'Lato', serif;
+}
+body > div#main {
+	background-color: black;
+	display: block;
+	height: auto;
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	color: white;
+	padding-top: 3%;
+	padding-bottom: 3%;
+	padding-left: 40px;
+}
+a:active {
+	border: none;
+}
+div#main > div.panel.panel-default {
+	width: 40%;
+	float: left;
+	margin-left: 35px;
+	height: auto;
+}
+div#main > div.panel.panel-default > div.panel-body {
+	color: black;
+	background-color: transparent;
+	margin-top: -3%;
+}
+.form-control {
+	margin-bottom: 5px;
+}
+.form-name{
+	width: 48.5%;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+.birthdays {
+	width: 48.5%;
+	float: left;
+	margin-right: 5px;
+}
+div#main > form > .form-group > .form-control {
+	margin: 3%;
+}
+.error {
+	background-color: #FF7F7F;
+	color: #000;
+}
+.errordropdown {
+	border-color: #FF7F7F;
+	border-width: 2px;
+}
+
+.errormsg {
+	background-color: #FF6E6E;
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+	display: block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 12px;
+	border-radius: 5px;
+}
