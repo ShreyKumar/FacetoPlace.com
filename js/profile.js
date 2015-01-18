@@ -1,54 +1,41 @@
 // profile.js
 $(document).ready(function(){
-	//unsubmit form
+	//global vars
+	var pin = $("#pin");
+	var pinitid = $("#pinit");
+	var pinit = $(".pinit");
 
 
 	$("textarea").click(function(){
 		$(this).html("");
 	});
-	var pin = $("#pin");
 
-	pin.on('click', function(e){
+	pin.click(function(){
+		//clone text box
+		var pinformclone = pinit.clone(true);
+		//grab content
+		var content = $("#content").val();
 
-		var content = $("#content");
-		
-		//DATA HANDLING
-		$.post('pin.php', {content: content.val()}, function(data){
-			var trimmed = data.split(" ");
-			var firstname = trimmed[0];
-			var lastname = trimmed[1];
-			var content = trimmed[2];
+		//replace pinit with content
+		pinit.css("color", "#000");
+		pinit.html(content);
 
-			//create clone
-			var newpinit = $("#pinit").clone();
-			
-			//replace with content
-			$("#pinit > .panel-body").html('<h4>' + firstname + ' ' + lastname.substr(0, 1) + '. </h4><br />' + content);
 
-			// move to right
-			var tomove = $("#allpins > .pinned-right:first-child");
+		//move first pin sideways
+		$("#allpins > .panel:first").animate({
+			marginLeft: '47.4%'
+		}, 2000 );
 
-			tomove.animate({
-				marginLeft: '47.4%'
-			}, 1000);
-			tomove.css('margin-top', '-14%');
-			$("#pinit").animate({
-				marginTop: '17%'
-			}, 1000, '', function(){
-				//add an old pinit class
-				$("#pinit").addClass('oldpinit');
-
-				//unscrew up format
-				$(".profilecard").css('margin-left', '47.5%');
-				$(".profilecard").css('margin-top', '-31%');
-				$(".oldpinit").css('margin-left', '-40%');
-
-				$("#pinit").removeAttr('id');
-				$(".oldpinit").before(newpinit);
-			});
+		//move pinit downwards
+		pinit.animate({
+			marginTop: '18.5%'
+		}, 2000, function(){
+			pinit.css("margin-top", "0%");
+			$("#allpins > .panel:first").css("margin-left", "35px");
+			pinitid.removeClass('pinit');
+			//pinitid.before(pinformclone);
 		});
 
-		
 	});
 		
 });

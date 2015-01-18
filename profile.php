@@ -19,6 +19,7 @@
 		};
 
 
+
 	} else {
 		header("Location: members.php");
 	};
@@ -90,13 +91,7 @@
 					echo $row['firstname'].' '.$row['lastname'];
 				?>
 			</h3>
-			<div class="panel panel-default" id="pinit">
-				<?
-					if(isset($_POST['pin'])){
-						//set session memberid
-						$_SESSION['memberid'] = $_GET['id'];
-					};
-				?>
+			<div class="panel panel-default pinit" id="pinitid">
 				<div class="panel-body">
 					<form method="post" id="pinform">
 						<textarea rows="3" class="form-control" id="content" name="content">Pin something on <? echo $row['firstname'] ?>'s Pinboard!</textarea>
@@ -132,22 +127,14 @@
 			<?
 				$gettb = mysql_query('SELECT * FROM '.$_GET['id'].'_pins');
 				$gettb_numrows = mysql_num_rows($gettb);
-				$gettb_fetchassoc = mysql_fetch_assoc($gettb);
 				
 				echo '<div id="allpins">';
-				
 				$i = 0;
-				for($i = 0; $i < $gettb_numrows; $i++){
+				while($gettb_fetchassoc = mysql_fetch_array($gettb)){
 					$findpinner = mysql_fetch_assoc(mysql_query('SELECT * FROM members WHERE id="'.$gettb_fetchassoc['pinnerid'].'"'));
-					
-					if(fmod($i, 2) == 0){
-						$property = 'pinned-right';
-					} else {
-						$property = 'pinned-left';
-					};
 
 					echo '
-						<div class="panel panel-default '.$property.'">
+						<div class="panel panel-default">
 							<div class="panel-body">
 								<h4>'.$findpinner['firstname'].' '.substr($findpinner['lastname'], 0, 1).'.</h4><br />
 								'.$gettb_fetchassoc['content'].'

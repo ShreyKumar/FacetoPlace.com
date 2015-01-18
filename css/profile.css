@@ -8,12 +8,17 @@ table#profiletable{
 div#profilecard {
 	width: 100%;
 }
+
 div#main > div.pinned-left {
 	margin-right: -1%;
 }
 div#main > div.pinned-right {
 	margin-left: -83.7%;
 	margin-top: 17%;
+}
+div.pinit {
+	display: block;
+	margin-right: 40%;
 }
 
 /* General */
@@ -57,4 +62,10 @@ div.panel.panel-default > div.panel-body {
 }
 div#main > form > .form-group > .form-control {
 	margin: 3%;
+}
+/* profilecard */
+div#main > div.profilecard {
+	position: absolute;
+	width: 378px;
+	margin-left:36.4%;
 }

@@ -3,9 +3,9 @@
 include "connect.php";
 session_start();
 
-if(isset($_SESSION['memberid']) && isset($_SESSION['id']) && isset($_POST['content'])){
+if(isset($_POST['pinneeid']) && isset($_SESSION['id']) && isset($_POST['content'])){
 	//get member ids
-	$pineeid = $_SESSION['memberid'];
+	$pinneeid = $_POST['pinneeid'];
 	$pinnerid = $_SESSION['id'];
 
 	//grab content
@@ -17,13 +17,13 @@ if(isset($_SESSION['memberid']) && isset($_SESSION['id']) && isset($_POST['conte
 	$lastname = $getfirstlast['lastname'];
 
 	//insert content
-	//$insert = mysql_query('INSERT INTO '.$pineeid.'_pins (pinnerid, content) VALUES ("'.$pinnerid.'", "'.$content.'")');
+	//$insert = mysql_query('INSERT INTO '.$pinneeid.'_pins (pinnerid, content) VALUES ("'.$pinnerid.'", "'.$content.'")');
 
 	echo $firstname.' '.$lastname.' '.$content;
 
 
 } else {
-	header('Location: index.php');
+	echo $_SESSION['memberid'].$_SESSION['id'].$_POST['content'];
 };
 
 
