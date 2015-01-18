@@ -230,81 +230,66 @@
 	};
 
 
-
+	// Handle signin here
 	var user = $("#signinusername");
 	var pass = $("#signinpassword");
+	var userready = false;
+	var passready = false;
 
-	// .click()
+	user.bind("keyup blur", function(){
+		//get data from signin.php
+		if(user.val().length == 0){
+			user.addClass('error');
+			userready = false;
+		} else {
+			user.removeClass('error');
+			userready = true;
+		};
+	});
+
+	pass.bind("keyup blur", function(){
+		if(pass.val().length == 0){
+			pass.addClass('error');
+			passready = false;
+		} else {
+			pass.removeClass('error');
+			passready = true;
+		};
+	});
+
 	signin.click(function(){
-		if(user.val().length == 0){
-			user.addClass('error');
-			remove_button(signin);
+
+		if(userready == true && passready == true){
+			//Geolocation
+    		if (navigator.geolocation) {
+        		navigator.geolocation.getCurrentPosition(showPosition);
+    		} else { 
+        		alert("Geolocation is not supported by this browser.");
+	    	};
+
+			function showPosition(position) {
+				var lat = position.coords.latitude;
+				var lon = position.coords.longitude;
+				$.post('signin.php', {
+					username: user.val(),
+					password: pass.val(),
+					lat: lat,
+					lon: lon
+				}, function(data){
+					if(data == 'Unable to update lat, long'){
+						errormsgsignin.html('Oops, an error occurred! <a href="sendme.php">Click here</a> to send an email to Shrey immidiately.');
+					} else {
+						//navigate to profile.php
+						window.location.href = 'profile.php?id=' + data;
+					};
+				});
+			};
 		} else {
-			user.removeClass('error');
-			add_button(signin);
-		};
+			errormsgsignin.html('');
+		}
+		
+	})
 
-		if(pass.val().length == 0){
-			pass.addClass('error');
-			remove_button(signin);
-		} else {
-			pass.removeClass('error');
-			add_button(signin);
-		};
-	});
-
-
-	// user.keyup()
-	user.keyup(function(){
-		if(user.val().length == 0){
-			user.addClass('error');
-			remove_button(signin);
-		} else {
-			user.removeClass('error');
-			add_button(signin);
-		};
-	});
-
-
-	// pass.keyup()
-	pass.keyup(function(){
-		if(pass.val().length == 0){
-			pass.addClass('error');
-			remove_button(signin);
-		} else {
-			pass.removeClass('error');
-			add_button(signin);
-		};
-	});
-
-	//user.blur()
-	user.blur(function(){
-		if(user.val().length == 0){
-			user.addClass('error');
-			remove_button(signin);
-		} else {
-			user.removeClass('error');
-			add_button(signin);
-		};
-	});
-
-	//pass.blur()
-	pass.blur(function(){
-		if(pass.val().length == 0){
-			pass.addClass('error');
-			remove_button(signin);
-		} else {
-			pass.removeClass('error');
-			add_button(signin);
-		};
-	});
-	
-
-	// if there exists no text remove class
-	
-	
-
-	remove_msg();
 	
 
 

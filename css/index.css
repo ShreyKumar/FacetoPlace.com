@@ -64,3 +64,8 @@ div#main > form > .form-group > .form-control {
 	padding-left: 12px;
 	border-radius: 5px;
 }
+#rememberme {
+	margin-left: 65%; 
+	margin-top: 3%; 
+	margin-right: 2%;
+}

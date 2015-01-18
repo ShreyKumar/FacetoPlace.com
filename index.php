@@ -148,12 +148,12 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<h3>Already a user? Sign in.</h3>
-					<form role="search" id="signin">
+					<form role="search" id="signin" onsubmit="return false;">
 						<div class="form-group">
-							<input type="text" class="form-control" id="signinusername" placeholder="Username" name="username"/>
-							<input type="password" class="form-control" id="signinpassword" placeholder="Password" name="password">
-							<input type="checkbox" id="rememberme" name="rememberme" style="margin-left: 65%; margin-top: 3%; margin-right: 2%"/>Remember me?
-                            <input type="submit" class="btn btn-default" id="signin" value="Sign in" name="signin">
+							<input type="text" class="form-control" id="signinusername" placeholder="Username" name="username" value="<? echo $_COOKIE['username']?>"/>
+							<input type="password" class="form-control" id="signinpassword" placeholder="Password" name="password" value="<? echo $_COOKIE['password']?>">
+							<input type="checkbox" id="rememberme" name="rememberme" />Remember me?
+                            <button class="btn btn-default" id="signin" name="signin">Sign in</button>
                             <div id="errormsgsignin" class="errormsg"></div>
 						</div>
 					</form>
