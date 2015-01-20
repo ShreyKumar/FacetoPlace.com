@@ -1,8 +1,7 @@
 <?
-//find.php
-//Used to locate person on map
-
-
+	//find.php
+	include "connect.php";
+	session_start();
 ?>
 <!-- Face to face -->
 <!DOCTYPE html>
@@ -27,8 +26,13 @@
 		<!-- Link CSS -->
 		<link href="css/index.css" rel="stylesheet" media="screen">
 		<style type="text/css">
+			body {
+				height: 415px;
+			}
 			iframe {
-				height: 339px;
+				height: 100%;
+				position: initial;
+				border: 0;
 			}
 		</style>
 	</head>

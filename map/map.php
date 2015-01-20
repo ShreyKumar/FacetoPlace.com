@@ -1,6 +1,15 @@
 <?
-  include "connect.php";
-  session_start();
+    //connect to db first
+    mysql_connect('localhost', 'root','root') or die('DIEE!!!');
+    mysql_select_db('facetoface');
+
+    //start session
+    session_start();
+    //get everyone's location
+    $query = mysql_query('SELECT * FROM `members`');
+
+
+        
 ?>
 <!DOCTYPE html>
 <html>
@@ -52,9 +61,37 @@ function initialize() {
         map: map,
         title: 'test'
       });
+
       google.maps.event.addListener(marker, 'click', function(){
         infowindow.open(map, marker);
       })
+
+      var custom_msg = '';
+      <?
+        while($getloc = mysql_fetch_array($query)){
+            echo 'var marker_'.$getloc['id'].' = new google.maps.Marker({
+                position: new google.maps.LatLng('.$getloc['lat'].', '.$getloc['lon'].'), 
+                map: map
+            });';
+            //info window
+            echo 'var infowindow_'.$getloc['id'].' = new google.maps.InfoWindow({
+                content: \''.$getloc['firstname'].'\'
+            });';
+            
+
+            //add click event
+            echo 'google.maps.event.addListener(marker_'.$getloc['id'].', \'click\', function(){
+                    infowindow_'.$getloc['id'].'.open(map, marker_'.$getloc['id'].');
+                });
+            ';
+
+            //add blur so that info window would close
+            echo ' google.maps.event.addListener(marker_'.$getloc['id'].', \'blur\', function(){
+                infowindow_'.$getloc['id'].'.close();
+            })
+            ';
+        };
+      ?>
       map.setCenter(pos);
     }, function() {
       handleNoGeolocation(true);
