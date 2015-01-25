@@ -21,20 +21,12 @@ $(document).ready(function(){
 		pinit.html(content);
 
 
-		//move first pin sideways
-		$("#allpins > .panel:first").animate({
-			marginLeft: '47.4%'
-		}, 2000 );
-
-		//move pinit downwards
-		pinit.animate({
-			marginTop: '18.5%'
-		}, 2000, function(){
-			pinit.css("margin-top", "0%");
-			$("#allpins > .panel:first").css("margin-left", "35px");
-			pinitid.removeClass('pinit');
-			//pinitid.before(pinformclone);
-		});
+		$("div#pane-right > div.pane-right:first").animate({
+			marginTop: '32%'
+		}, 2000);
+		pinitid.animate({
+			marginTop: '25%'
+		}, 2000);
 
 	});
 		

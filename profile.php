@@ -52,6 +52,8 @@
 			
 			*/
 		</script>
+		<!-- Link CSS -->
+		<link href="css/profile.css" rel="stylesheet">
 		<!-- Link bootstrap -->
 		<link href="bootstrap/css/bootstrap-theme.css" rel="stylesheet">
 		<link href="bootstrap/css/bootstrap-theme.css.map" rel="stylesheet">
@@ -60,8 +62,6 @@
 		<link href="bootstrap/css/bootstrap.css.map" rel="stylesheet">
 		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-		<!-- Link CSS -->
-		<link href="css/profile.css" rel="stylesheet">
 		<!-- Link JS -->
 		<script type="text/javascript" src="js/custom.js"></script>
 		<script type="text/javascript" src="js/profile.js"></script>
@@ -128,19 +128,46 @@
 				$gettb = mysql_query('SELECT * FROM '.$_GET['id'].'_pins');
 				$gettb_numrows = mysql_num_rows($gettb);
 				
-				echo '<div id="allpins">';
+				echo '<div id="allpins">
+				';
 				$i = 0;
 				while($gettb_fetchassoc = mysql_fetch_array($gettb)){
-					$findpinner = mysql_fetch_assoc(mysql_query('SELECT * FROM members WHERE id="'.$gettb_fetchassoc['pinnerid'].'"'));
-
-					echo '
-						<div class="panel panel-default">
+					$pinnerquery = mysql_query('SELECT * FROM members WHERE id="'.$gettb_fetchassoc['pinnerid'].'"');
+					$findpinner = mysql_fetch_assoc($pinnerquery);
+					$pinner_num_rows = mysql_num_rows($pinnerquery);
+					
+					$pane_right = '
+						<div class="panel panel-default pane-right" style="position: absoloute;">
 							<div class="panel-body">
 								<h4>'.$findpinner['firstname'].' '.substr($findpinner['lastname'], 0, 1).'.</h4><br />
 								'.$gettb_fetchassoc['content'].'
 							</div>
-						</div>
+						</div><br>
 					';
+					$pane_left = '
+						<div class="panel panel-default pane-left" style="position: absoloute;">
+							<div class="panel-body">
+								<h4>'.$findpinner['firstname'].' '.substr($findpinner['lastname'], 0, 1).'.</h4><br />
+								'.$gettb_fetchassoc['content'].'
+							</div>
+						</div><br>
+					';
+					if($i == 0){
+						echo '<div id="pane-right">';
+						echo $pane_right;
+					} else if($i < 5){
+						echo $pane_right;
+					} else if($i == 5){
+						echo '</div>'.$pane_right.'
+						<div id="pane-left">';
+					} else if($i > 5 && $i < $pinner_num_rows){
+						echo $pane_left;
+					} else if($i == $pinner_num_rows){
+						echo $pane_left;
+						echo '</div>';
+					};
+
+					$i += 1;
 				};
 
 				echo '</div>';

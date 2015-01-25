@@ -73,11 +73,20 @@ function initialize() {
                 position: new google.maps.LatLng('.$getloc['lat'].', '.$getloc['lon'].'), 
                 map: map
             });';
+            //get interests
+            $interestquery = mysql_query('SELECT * FROM '.$_SESSION['id'].'_interests');
+            $interest_numrows = mysql_num_rows($interestquery);
+
             //info window
+            $infowindowstart = $getloc['firstname'].' '.$getloc['lastname'].substr(0, 1).'. '
+
             echo 'var infowindow_'.$getloc['id'].' = new google.maps.InfoWindow({
-                content: \''.$getloc['firstname'].'\'
-            });';
-            
+                content: \''.$infowindowstart.'<br /> Interests: \''
+            //iterate out interests
+            while($get_interest = mysql_fetch_array($query)){
+                echo $get_interest['interestname'];
+            }
+            echo '});';
 
             //add click event
             echo 'google.maps.event.addListener(marker_'.$getloc['id'].', \'click\', function(){
